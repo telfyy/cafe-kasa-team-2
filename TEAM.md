@@ -1061,4 +1061,5 @@ flowchart TD
 |--------|------------|-------|
 | 1      | rules.py   | Артем |
 | 2      | parsing.py | Артем |
+| 3      | loading.py | Артем |
 | 4      | stats.py   | Артем |

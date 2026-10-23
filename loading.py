@@ -4,7 +4,19 @@ from parsing import parse_line
 
 def read_lines(path):
     """Непорожні рядки файлу без пробілів і "\\n" по краях. Немає файлу → FileNotFoundError."""
-    raise NotImplementedError("задача 3: напиши read_lines()")
+
+    with open(path, encoding='utf-8') as f:
+
+        lines = []
+
+        for line in f:
+
+            line = line.strip()
+
+            if line:
+                lines.append(line)
+
+        return lines
 
 
 def load_orders(lines):
@@ -13,4 +25,16 @@ def load_orders(lines):
     Чеки — RawOrder від parse_line у тому ж порядку.
     Помилки — рядки "рядок N: пояснення", N рахується з 1.
     """
-    raise NotImplementedError("задача 3: напиши load_orders()")
+
+    orders = []
+    errors = []
+
+    for number, line in enumerate(lines, start=1):
+
+        try:
+            orders.append(parse_line(line))
+
+        except ValueError as error:
+            errors.append(f"рядок {number}: {error}")
+
+    return orders, errors
