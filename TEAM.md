@@ -1063,3 +1063,5 @@ flowchart TD
 | 2      | parsing.py | Артем |
 | 3      | loading.py | Артем |
 | 4      | stats.py   | Артем |
+| 5      | report.py  | Артем |
+| 6      | output.py  | Артем |

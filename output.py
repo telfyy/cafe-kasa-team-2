@@ -4,7 +4,9 @@ import json
 
 def save_json(report, path):
     """Записує звіт у JSON: кирилиця як є (ensure_ascii=False), відступ 2."""
-    raise NotImplementedError("задача 6: напиши save_json()")
+
+    with open(path, "w", encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
 
 
 def format_report(report):
@@ -18,4 +20,25 @@ def format_report(report):
 
     Порожні значення (None, порожній словник) — символ "—".
     """
-    raise NotImplementedError("задача 6: напиши format_report()")
+
+    by_day_str = ', '.join(f'{day} {amount:.2f}' for day, amount in report['by_day'].items())
+    by_meal_str = ', '.join(f'{time} {amount}' for time, amount in report['by_meal'].items())
+
+    if not report['best_day']:
+        report['best_day'] = '—'
+
+    if not by_day_str:
+        by_day_str = '—'
+
+    if not by_meal_str:
+        by_meal_str = '—'
+
+    expected = (
+        f"Чеків: {report['orders']}, пропущено рядків: {report['skipped']}\n"
+        f"Виторг: {report['revenue']:.2f} грн, середній чек: {report['average']:.2f} грн\n"
+        f"Найкращий день: {report['best_day']}\n"
+        f"За днями: {by_day_str}\n"
+        f"За прийомом їжі: {by_meal_str}"
+    )
+
+    return expected
